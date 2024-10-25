@@ -3,5 +3,5 @@ package org.example.services;
 import java.util.List;
 
 public interface DataHandler {
-    float[] getVisingAttributes(List<String> list, int shift);
+    float[] getVisitingAttributes(List<String> list, int shift);
 }
