@@ -4,7 +4,7 @@ import org.example.Constants;
 
 import java.util.List;
 
-public class StringHandler implements DataHandler{
+public class AttributeExtractor implements DataHandler{
 
     @Override
     public float[] getVisitingAttributes(List<String> list, int shift) {

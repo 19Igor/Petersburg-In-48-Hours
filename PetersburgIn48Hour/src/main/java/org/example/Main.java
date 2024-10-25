@@ -11,7 +11,7 @@ public class Main {
         float[] hours;
         float[] priorities;
 
-        DataHandler  parser = new StringHandler();
+        DataHandler  parser = new AttributeExtractor();
         hours      = parser.getVisitingAttributes(attractionList, Constants.HOUR_SHIFT);
         priorities = parser.getVisitingAttributes(attractionList, Constants.PRIORITY_SHIFT);
 
