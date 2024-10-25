@@ -7,18 +7,28 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Reader reader = new FileReader();
-        List<String> data  = reader.readFromFile(Constants.DATA_FILE_PATH);
-        float[] hours      = new float[data.size()];
-        float[] priorities = new float[data.size()];
+        List<String> attractionList  = reader.readFromFile(Constants.DATA_FILE_PATH);
+        float[] hours;
+        float[] priorities;
 
-        DataHandler parser = new StringHandler();
-        // Мне нужно заполнить массивы hours и priorities
-        hours      = parser.getVisingAttributes(data, Constants.HOUR_SHIFT);
-        priorities = parser.getVisingAttributes(data, Constants.PRIORITY_SHIFT);
+        DataHandler  parser = new StringHandler();
+        hours      = parser.getVisitingAttributes(attractionList, Constants.HOUR_SHIFT);
+        priorities = parser.getVisitingAttributes(attractionList, Constants.PRIORITY_SHIFT);
 
-        int ab = 11;
+        RouteNavigator navigator = new OptimalRouteNavigator(hours, priorities);
+        List<Integer> res = navigator.findRoute();
 
+        System.out.println("Оптимальный маршрут для знакомства с Питером:");
+        for (Integer index : res){
+            System.out.println(attractionList.get(index - 1));
+        }
+
+        float tripTime = 0;
+        for (Integer time : res){
+            tripTime += hours[time - 1];
+        }
+        System.out.println("\nВесь маршрут займёт столько времени: " + tripTime + " ч.");
+        float remainingTime = (float) Constants.TOTAL_REMAINING_HOURS - tripTime;
+        System.out.println("У вас ещё останется "+ remainingTime + " ч. Так что можно ещё отдохнуть после прогулки и выпить кофе :)");
     }
-
-
 }
